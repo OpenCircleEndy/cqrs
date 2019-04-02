@@ -1,7 +1,9 @@
 package com.ocs.cqrs.demo.contract;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -19,6 +22,9 @@ import java.util.List;
 @Slf4j
 class ContractApi {
 
+    @Autowired
+    private CreateContractCommandHandler handler;
+
     /**
      * Command: Create a new contract.
      *
@@ -26,8 +32,8 @@ class ContractApi {
      */
     @PostMapping("contracts")
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@RequestBody @Valid CreateContractCommand command) {
-        log.info("Received command {}", command);
+    ResponseEntity<?> create(@RequestBody @Valid CreateContractCommand command) {
+        return ResponseEntity.created(URI.create("contracts/" + this.handler.handle(command).toString())).build();
     }
 
     /**
