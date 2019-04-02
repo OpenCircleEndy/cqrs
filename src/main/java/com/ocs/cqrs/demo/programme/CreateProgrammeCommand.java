@@ -5,11 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
+
 @SuppressWarnings("unused")
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 class CreateProgrammeCommand {
+
+    @NotNull
     private String code;
     private String retailerName;
     private String retailerId;

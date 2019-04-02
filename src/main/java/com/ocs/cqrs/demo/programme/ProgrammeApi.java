@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @Slf4j
 public class ProgrammeApi {
 
     @PostMapping("programme")
-    void create(@RequestBody CreateProgrammeCommand command) {
+    void create(@RequestBody @Valid CreateProgrammeCommand command) {
         log.info("Received command {}", command);
     }
 }
