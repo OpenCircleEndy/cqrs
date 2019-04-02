@@ -15,6 +15,6 @@ class CreateProgrammeCommand {
 
     @NotNull
     private String code;
-    private String retailerName;
-    private String retailerId;
+    private String customerName;
+    private String customerId;
 }
