@@ -6,10 +6,19 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Handles the create contract command.
+ */
 @Slf4j
 @Service
 class CreateContractCommandHandler {
 
+    /**
+     * Create contract.
+     *
+     * @param createContractCommand create contract command.
+     * @return id of the created contract.
+     */
     UUID handle(CreateContractCommand createContractCommand) {
 
         UUID customerEntityId = this.validateCustomer(createContractCommand.getCustomerId(), createContractCommand.getCustomerId());
