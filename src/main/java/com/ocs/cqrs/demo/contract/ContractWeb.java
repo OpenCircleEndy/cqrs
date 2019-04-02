@@ -21,10 +21,10 @@ import java.util.UUID;
 class ContractWeb {
 
     @JsonProperty
-    private final String type;
+    private final UUID id;
 
     @JsonProperty
-    private final UUID id;
+    private final String type;
 
     static List<ContractWeb> randomList() {
         return Arrays.asList(

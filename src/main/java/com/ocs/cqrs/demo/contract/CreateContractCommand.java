@@ -8,7 +8,7 @@ import lombok.ToString;
 import javax.validation.constraints.NotNull;
 
 /**
- * Command requesting a new program to be created.
+ * Command requesting a new contract to be created.
  */
 @SuppressWarnings("unused")
 @Getter
