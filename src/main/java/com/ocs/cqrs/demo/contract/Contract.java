@@ -4,17 +4,24 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
 /**
  * Contract domain object.
  */
+@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class Contract {
 
+    @Id
     private UUID id;
     private String type;
+
+    @Column(name = "customer_id")
     private UUID customerId;
 
     /**

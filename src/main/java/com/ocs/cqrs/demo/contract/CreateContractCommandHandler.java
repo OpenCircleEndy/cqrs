@@ -1,6 +1,7 @@
 package com.ocs.cqrs.demo.contract;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -12,6 +13,9 @@ import java.util.UUID;
 @Slf4j
 @Service
 class CreateContractCommandHandler {
+
+    @Autowired
+    private ContractRepository repository;
 
     /**
      * Create contract.
@@ -49,6 +53,6 @@ class CreateContractCommandHandler {
     }
 
     private UUID store(Contract contract) {
-        return UUID.randomUUID();
+        return this.repository.save(contract).getId();
     }
 }

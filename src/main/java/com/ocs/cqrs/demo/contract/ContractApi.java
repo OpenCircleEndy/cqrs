@@ -27,6 +27,9 @@ class ContractApi {
     @Autowired
     private CreateContractCommandHandler handler;
 
+    @Autowired
+    private ContractRepository repository;
+
     /**
      * Command: Create a new contract.
      *
