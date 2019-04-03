@@ -2,6 +2,7 @@ package com.ocs.cqrs.demo.contract;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -15,6 +16,9 @@ import java.util.UUID;
 class CreateContractCommandHandler {
 
     @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
+    @Autowired
     private ContractRepository repository;
 
     /**
@@ -25,9 +29,13 @@ class CreateContractCommandHandler {
      */
     UUID handle(CreateContractCommand createContractCommand) {
 
-        UUID customerEntityId = this.validateCustomer(createContractCommand.getCustomerId(), createContractCommand.getCustomerId());
+        UUID customerEntityId = this.validateCustomer(createContractCommand.getCustomerId(), createContractCommand.getCustomerName());
 
-        return this.store(new Contract(createContractCommand, customerEntityId));
+        Contract newContract = this.store(new Contract(createContractCommand, customerEntityId));
+
+        this.applicationEventPublisher.publishEvent(ContractCreated.builder().contract(newContract).build());
+
+        return newContract.getId();
     }
 
     private UUID validateCustomer(String customerId, String customerName) {
@@ -52,7 +60,7 @@ class CreateContractCommandHandler {
         return UUID.randomUUID();
     }
 
-    private UUID store(Contract contract) {
-        return this.repository.save(contract).getId();
+    private Contract store(Contract contract) {
+        return this.repository.save(contract);
     }
 }

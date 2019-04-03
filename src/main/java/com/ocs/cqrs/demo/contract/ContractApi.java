@@ -28,7 +28,7 @@ class ContractApi {
     private CreateContractCommandHandler handler;
 
     @Autowired
-    private ContractRepository repository;
+    private ContractWebRepository repository;
 
     /**
      * Command: Create a new contract.
@@ -48,6 +48,6 @@ class ContractApi {
      */
     @GetMapping("contracts")
     List<ContractWeb> list() {
-        return ContractWeb.randomList();
+        return this.repository.getAllContracts();
     }
 }
