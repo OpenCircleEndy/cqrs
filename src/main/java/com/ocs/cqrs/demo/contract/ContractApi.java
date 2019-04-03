@@ -17,6 +17,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @RestController
+@CrossOrigin(origins = "*")
 @Slf4j
 class ContractApi {
 
@@ -36,7 +37,6 @@ class ContractApi {
      *
      * @return web view of the list of contracts.
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("contracts")
     List<ContractWeb> list() {
         return ContractWeb.randomList();
