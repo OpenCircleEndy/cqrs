@@ -34,13 +34,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration(initializers = {ContractApiTest.Initializer.class})
 class ContractApiTest implements ApplicationContextAware {
 
+    static ApplicationContext applicationContext;
+
     @Container
     private static JdbcDatabaseContainer postgreSQLContainer = new PostgreSQLContainer()
             .withDatabaseName("contracts")
             .withUsername("test")
             .withPassword("secret");
 
-    static ApplicationContext applicationContext;
     @Autowired
     private TestRestTemplate restTemplate;
 
