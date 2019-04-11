@@ -8,12 +8,14 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.util.UUID;
 
 /**
  * Web app view of a contract.
  */
+@Getter
 @EqualsAndHashCode
 @Builder(builderClassName = "ContractWebBuilder")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
