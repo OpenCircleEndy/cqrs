@@ -1,9 +1,14 @@
 package com.ocs.cqrs.demo.contract;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @Testcontainers
 @ContextConfiguration(initializers = {ContractRepositoryTest.Initializer.class})
-class ContractRepositoryTest {
+class ContractRepositoryTest implements ApplicationContextAware {
 
     @Container
     private static JdbcDatabaseContainer postgreSQLContainer = new PostgreSQLContainer()
@@ -30,9 +35,21 @@ class ContractRepositoryTest {
     @Autowired
     private ContractRepository subject;
 
+    static ApplicationContext applicationContext;
+
+    @AfterAll
+    static void helpSpring() {
+        SpringApplication.exit(applicationContext, () -> 0);
+    }
+
     @Test
     void whenAllContractsAreRequested() throws SQLException {
         assertEquals(0, this.subject.count());
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ContractRepositoryTest.applicationContext = applicationContext;
     }
 
     static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
