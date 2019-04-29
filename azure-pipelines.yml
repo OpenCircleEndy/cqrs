@@ -23,7 +23,7 @@ steps:
     findBugsRunAnalysis: true
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    sonarQubeRunAnalysis: true
+    sonarQubeRunAnalysis: false
     goals: 'package'
 - task: PublishCodeCoverageResults@1
   inputs:
