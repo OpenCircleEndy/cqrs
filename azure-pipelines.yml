@@ -19,11 +19,11 @@ steps:
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     checkStyleRunAnalysis: true
-    pmdRunAnalysis: false
-    findBugsRunAnalysis: false
+    pmdRunAnalysis: true
+    findBugsRunAnalysis: true
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: true
     goals: 'package'
 - task: PublishCodeCoverageResults@1
   inputs:
