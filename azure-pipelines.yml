@@ -23,4 +23,4 @@ steps:
     goals: 'package'
 - task: PublishCodeCoverageResults@1
   inputs:
-    summaryFileLocation: '**/site/jacoco/jacoco.csv'
+    summaryFileLocation: '**/site/jacoco/jacoco.xml'
