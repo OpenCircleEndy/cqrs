@@ -24,3 +24,4 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     summaryFileLocation: '**/site/jacoco/jacoco.xml'
+    reportDirectory: '**/site/jacoco'
