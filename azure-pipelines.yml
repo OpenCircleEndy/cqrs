@@ -19,9 +19,11 @@ steps:
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/cqrs/**/surefire-reports/TEST-*.xml'
     goals: 'package'
 - task: PublishCodeCoverageResults@1
   inputs:
-    summaryFileLocation: '**/site/jacoco/jacoco.xml'
-    reportDirectory: '**/site/jacoco'
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/cqrs/**/site/jacoco/jacoco.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/cqrs/**/site/jacoco/'
+    additionalCodeCoverageFiles: '$(System.DefaultWorkingDirectory)/cqrs/**/*.exec'
