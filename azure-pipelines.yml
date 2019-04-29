@@ -23,7 +23,6 @@ steps:
     findBugsRunAnalysis: false
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    codeCoverageToolOption: 'jaCoCo'
     sonarQubeRunAnalysis: false
     goals: 'package'
 - task: PublishCodeCoverageResults@1
