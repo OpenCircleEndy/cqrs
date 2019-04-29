@@ -19,8 +19,8 @@ steps:
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     checkStyleRunAnalysis: true
-    pmdRunAnalysis: true
-    findBugsRunAnalysis: true
+    pmdRunAnalysis: false
+    findBugsRunAnalysis: false
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'jaCoCo'
