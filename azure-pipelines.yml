@@ -18,7 +18,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
-    checkStyleRunAnalysis: false
+    checkStyleRunAnalysis: true
     pmdRunAnalysis: true
     findBugsRunAnalysis: true
     publishJUnitResults: true
