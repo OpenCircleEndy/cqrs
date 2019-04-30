@@ -18,14 +18,14 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
-    checkStyleRunAnalysis: true
-    pmdRunAnalysis: false
+    checkStyleRunAnalysis: false
+    pmdRunAnalysis: true
     findBugsRunAnalysis: true
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    codeCoverageToolOption: 'jaCoCo'
     sonarQubeRunAnalysis: false
     goals: 'package'
+    continueOnError: false
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'JaCoCo'
