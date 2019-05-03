@@ -34,6 +34,7 @@ class ContractApi {
      * Command: Create a new contract.
      *
      * @param command create contract command.
+     * @return HTTP Status Code 201, if the the create contract command is processed.
      */
     @PostMapping("contracts")
     @ResponseStatus(HttpStatus.CREATED)

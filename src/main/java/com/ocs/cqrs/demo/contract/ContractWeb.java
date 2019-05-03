@@ -29,7 +29,7 @@ class ContractWeb {
     private final String type;
 
     @JsonProperty
-    private final String customerName;
+    private final String relationName;
 
     @JsonPOJOBuilder
     static class ContractWebBuilder {

@@ -19,9 +19,8 @@ class CreateLeadCommand {
     @NotNull
     private String number;
 
-    private String customerName;
+    private String relationName;
 
-    private String customerId;
-
+    private String relationId;
     private int quantity;
 }

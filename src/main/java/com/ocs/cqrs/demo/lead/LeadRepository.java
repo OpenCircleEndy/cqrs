@@ -3,12 +3,13 @@ package com.ocs.cqrs.demo.lead;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 /**
- * Jpa repository for {@link Lead}.
+ * In memory repository for {@link Lead}.
  */
 @Repository
 public class LeadRepository implements CrudRepository<Lead, Long> {
@@ -16,12 +17,12 @@ public class LeadRepository implements CrudRepository<Lead, Long> {
     private Set<Lead> database = new HashSet<>();
 
     @Override
-    public <S extends Lead> S save(S s) {
-        if (s.getId() < 1) {
-            s.setId(this.generateId());
+    public Lead save(@NotNull Lead lead) {
+        if (lead.getId() < 1) {
+            lead.setId(this.generateId());
         }
-        database.add(s);
-        return s;
+        database.add(lead);
+        return lead;
     }
 
     @Override
@@ -31,14 +32,14 @@ public class LeadRepository implements CrudRepository<Lead, Long> {
     }
 
     @Override
-    public Optional<Lead> findById(Long id) {
+    public Optional<Lead> findById(@NotNull Long id) {
         return this.database.stream()
                 .filter(lead -> lead.getId() == id)
                 .findAny();
     }
 
     @Override
-    public boolean existsById(Long id) {
+    public boolean existsById(@NotNull Long id) {
         return this.findById(id).isPresent();
     }
 
@@ -49,7 +50,20 @@ public class LeadRepository implements CrudRepository<Lead, Long> {
 
     @Override
     public Iterable<Lead> findAllById(Iterable<Long> iterable) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Find all by id is not supported");
+    }
+
+    /**
+     * Find by lead number.
+     *
+     * @param number must not be {@literal null}.
+     * @return the entity with the given id or {@literal Optional#empty()} if none found
+     * @throws IllegalArgumentException if {@code number} is {@literal null}.
+     */
+    public Optional<Lead> findByNumber(@NotNull String number) {
+        return this.database.stream()
+                .filter(lead -> lead.getNumber().equals(number))
+                .findAny();
     }
 
     @Override
@@ -77,7 +91,6 @@ public class LeadRepository implements CrudRepository<Lead, Long> {
         this.database = new HashSet<>();
     }
 
-
     private long generateId() {
         return this.database.stream()
                 .map(Lead::getId)
@@ -85,4 +98,5 @@ public class LeadRepository implements CrudRepository<Lead, Long> {
                 .max()
                 .orElse(0L) + 1;
     }
+
 }

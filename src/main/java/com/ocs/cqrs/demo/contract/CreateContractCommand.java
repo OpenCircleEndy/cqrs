@@ -18,6 +18,7 @@ class CreateContractCommand {
 
     @NotNull
     private String type;
-    private String customerName;
-    private String customerId;
+
+    @NotNull
+    private String leadNumber;
 }

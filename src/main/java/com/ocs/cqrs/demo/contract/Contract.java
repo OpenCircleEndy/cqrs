@@ -21,18 +21,18 @@ class Contract {
     private UUID id;
     private String type;
 
-    @Column(name = "customer_id")
-    private UUID customerId;
+    @Column(name = "relation_id")
+    private UUID relationId;
 
     /**
-     * New contract can be created using the create contract command and a valid customer.
+     * New contract can be created using the create contract command and a valid relation.
      *
      * @param createContractCommand the create contract command.
-     * @param customerId            customer id.
+     * @param relationId            relation id.
      */
-    Contract(CreateContractCommand createContractCommand, UUID customerId) {
+    Contract(CreateContractCommand createContractCommand, UUID relationId) {
         this.id = UUID.randomUUID();
         this.type = createContractCommand.getType();
-        this.customerId = customerId;
+        this.relationId = relationId;
     }
 }

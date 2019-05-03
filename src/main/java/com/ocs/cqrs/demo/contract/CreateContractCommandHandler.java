@@ -1,5 +1,7 @@
 package com.ocs.cqrs.demo.contract;
 
+import com.ocs.cqrs.demo.lead.Lead;
+import com.ocs.cqrs.demo.lead.LeadRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -21,6 +23,9 @@ class CreateContractCommandHandler {
     @Autowired
     private ContractRepository repository;
 
+    @Autowired
+    private LeadRepository leadRepository;
+
     /**
      * Create contract.
      *
@@ -29,35 +34,23 @@ class CreateContractCommandHandler {
      */
     UUID handle(CreateContractCommand createContractCommand) {
 
-        UUID customerEntityId = this.validateCustomer(createContractCommand.getCustomerId(), createContractCommand.getCustomerName());
+        UUID relationEntityId = this.getRelationId(createContractCommand.getLeadNumber());
 
-        Contract newContract = this.store(new Contract(createContractCommand, customerEntityId));
+        Contract newContract = this.store(new Contract(createContractCommand, relationEntityId));
 
         this.applicationEventPublisher.publishEvent(ContractCreated.builder().contract(newContract).build());
 
         return newContract.getId();
     }
 
-    private UUID validateCustomer(String customerId, String customerName) {
-        if (!(Objects.isNull(customerId) || Objects.isNull(customerName))) {
-            log.warn("CreateContract: Customer id and customer name present, customer id will be used");
-            customerName = null;
+    private UUID getRelationId(String leadNumber) {
+        if (Objects.isNull(leadNumber)) {
+            throw new IllegalArgumentException("Lead Number not present!");
         }
+        return this.leadRepository.findByNumber(leadNumber)
+                .map(Lead::getRelationId)
+                .orElseThrow(IllegalStateException::new);
 
-        if (customerId != null) {
-            return this.getCustomerIdById(customerId);
-        } else if (customerName != null) {
-            return this.getCustomerIdByName(customerName);
-        }
-        return null;
-    }
-
-    private UUID getCustomerIdById(String customerId) {
-        return UUID.fromString(customerId);
-    }
-
-    private UUID getCustomerIdByName(String customerName) {
-        return UUID.randomUUID();
     }
 
     private Contract store(Contract contract) {

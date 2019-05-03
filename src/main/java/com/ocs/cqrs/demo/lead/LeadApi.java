@@ -37,6 +37,7 @@ class LeadApi {
      * Command: Create a new lead.
      *
      * @param command create lead command.
+     * @return HTTP Status Code 201, if the the create lead command is processed.
      */
     @PostMapping("leads")
     @ResponseStatus(HttpStatus.CREATED)
@@ -47,7 +48,7 @@ class LeadApi {
     /**
      * Query: Get the list of leads to display in a web application.
      *
-     * @return web view of the list of leads.
+     * @param leadCreated lead created event.
      */
     @EventListener
     public void handleLeadCreatedEvent(LeadCreated leadCreated) {
