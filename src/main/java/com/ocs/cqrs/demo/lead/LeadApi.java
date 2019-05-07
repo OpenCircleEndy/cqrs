@@ -1,5 +1,6 @@
 package com.ocs.cqrs.demo.lead;
 
+import com.ocs.cqrs.demo.command.CommandHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.net.URI;
 
 /**
  * The combined command and query lead api.
@@ -25,7 +25,7 @@ import java.net.URI;
 class LeadApi {
 
     @Autowired
-    private CreateLeadCommandHandler handler;
+    private CommandHandler handler;
 
     @Autowired
     private LeadRepository repository;
@@ -37,12 +37,13 @@ class LeadApi {
      * Command: Create a new lead.
      *
      * @param command create lead command.
-     * @return HTTP Status Code 201, if the the create lead command is processed.
+     * @return HTTP Status Code 200, if the the create lead command is processed.
      */
     @PostMapping("leads")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> create(@RequestBody @Valid CreateLeadCommand command) {
-        return ResponseEntity.created(URI.create("leads/" + this.handler.handle(command))).build();
+        this.handler.handle(command);
+        return ResponseEntity.ok().build();
     }
 
     /**

@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Service
-class CreateLeadCommandHandler {
+public class CreateLeadCommandHandler {
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
@@ -32,7 +32,7 @@ class CreateLeadCommandHandler {
      * @param createContractCommand create Lead command.
      * @return logical key of the created Lead.
      */
-    String handle(CreateLeadCommand createContractCommand) {
+    public String handle(CreateLeadCommand createContractCommand) {
 
         UUID relationEntityId = this.validateRelation(createContractCommand.getRelationId(), createContractCommand.getRelationName());
 

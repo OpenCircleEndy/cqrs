@@ -1,5 +1,6 @@
 package com.ocs.cqrs.demo.contract;
 
+import com.ocs.cqrs.demo.command.CommandHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
 class ContractApi {
 
     @Autowired
-    private CreateContractCommandHandler handler;
+    private CommandHandler handler;
 
     @Autowired
     private ContractWebRepository repository;
@@ -34,12 +34,13 @@ class ContractApi {
      * Command: Create a new contract.
      *
      * @param command create contract command.
-     * @return HTTP Status Code 201, if the the create contract command is processed.
+     * @return HTTP Status Code 200, if the the create contract command is processed.
      */
     @PostMapping("contracts")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> create(@RequestBody @Valid CreateContractCommand command) {
-        return ResponseEntity.created(URI.create("contracts/" + this.handler.handle(command).toString())).build();
+        this.handler.handle(command);
+        return ResponseEntity.ok().build();
     }
 
     /**

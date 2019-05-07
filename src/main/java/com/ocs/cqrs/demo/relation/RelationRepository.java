@@ -44,21 +44,10 @@ public class RelationRepository implements ReadOnlyRepository<Relation, UUID> {
 
     @PostConstruct
     private void loadRelations() {
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Acme Corporation").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Globex Corporation").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Soylent Corp").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Initech").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Bluth Company").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Umbrella Corporation").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Hooli").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Vehement Capital Partners").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Massive Dynamic").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Wonka Industries").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Stark Industries").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Gekko & Co").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Wayne Enterprises").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Bubba Gump").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Cyberdyne Systems").build());
-        this.database.add(Relation.builder().id(UUID.randomUUID()).name("Genco Pura Olive Oil Company").build());
+        this.database.add(Relation.builder().id(UUID.fromString("42fc4872-c358-4014-8e1d-eb786096ba87")).name("Acme Corporation").build());
+        this.database.add(Relation.builder().id(UUID.fromString("15b48e3b-443e-40e0-b36f-43af14262aab")).name("Bubba Gump").build());
+        this.database.add(Relation.builder().id(UUID.fromString("756c45ad-c0c3-4fa6-a9fe-2f4a0ee8fbf8")).name("Stark Industries").build());
+        this.database.add(Relation.builder().id(UUID.fromString("7844a615-afd4-43f7-b56f-6bb50abb240d")).name("Umbrella Corporation").build());
+        this.database.add(Relation.builder().id(UUID.fromString("ffd00cb2-72f6-4e5e-a03c-6966c244dc9c")).name("Wayne Enterprises").build());
     }
 }

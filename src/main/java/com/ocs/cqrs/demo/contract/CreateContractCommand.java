@@ -1,5 +1,6 @@
 package com.ocs.cqrs.demo.contract;
 
+import com.ocs.cqrs.demo.command.Command;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class CreateContractCommand {
+public class CreateContractCommand implements Command {
 
     @NotNull
     private String type;

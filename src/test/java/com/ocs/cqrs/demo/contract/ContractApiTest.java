@@ -84,7 +84,7 @@ class ContractApiTest implements ApplicationContextAware {
                 String.class);
 
         // Given the contract is created.
-        assertEquals(HttpStatus.CREATED.value(), createContractResponse.getStatusCodeValue());
+        assertEquals(HttpStatus.OK.value(), createContractResponse.getStatusCodeValue());
 
         // When all contracts are requested.
         String getAllContractsResponse = restTemplate.getForObject("/contracts", String.class);
