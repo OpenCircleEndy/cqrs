@@ -15,8 +15,8 @@
     <description>Demo CQRS project</description>
 
     <properties>
-        <maven.compiler.target>8</maven.compiler.target>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.target>12</maven.compiler.target>
         <testcontainers.version>1.11.2</testcontainers.version>
     </properties>
 
@@ -47,6 +47,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
             <optional>true</optional>
         </dependency>
 
@@ -118,7 +119,18 @@
                 <version>4.0.2</version>
                 <configuration>
                     <cveValidForHours>8</cveValidForHours>
+                    <enableExperimental>false</enableExperimental>
+                    <enableRetired>false</enableRetired>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <nodeAnalyzerEnabled>false</nodeAnalyzerEnabled>
+                    <pyDistributionAnalyzerEnabled>false</pyDistributionAnalyzerEnabled>
+                    <pyPackageAnalyzerEnabled>false</pyPackageAnalyzerEnabled>
+                    <rubygemsAnalyzerEnabled>false</rubygemsAnalyzerEnabled>
+                    <nugetconfAnalyzerEnabled>false</nugetconfAnalyzerEnabled>
+                    <nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+                    <cocoapodsAnalyzerEnabled>false</cocoapodsAnalyzerEnabled>
+                    <swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
+                    <composerAnalyzerEnabled>false</composerAnalyzerEnabled>
                     <connectionTimeout>60000</connectionTimeout>
                 </configuration>
             </plugin>
